@@ -1,0 +1,3 @@
+se requiere tailwindcss postcss@latest y autoprefixer 
+
+npx tailwindcss init-> dentro de la raiz
