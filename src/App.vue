@@ -30,7 +30,7 @@ export default {
   height: 100vh;
   width: 100%;
   z-index: -1;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 /* #app {
   z-index: 1;
