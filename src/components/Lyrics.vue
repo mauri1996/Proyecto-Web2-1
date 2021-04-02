@@ -1,23 +1,7 @@
-<script>
-  export default {
-    name: 'Modal',
-    methods: {
-      close() {
-        this.$emit('close');
-      },
-    },
-    props:{
-      url:{
-        type:String,        
-      }
-    }
-  };
-</script>
-
 <template>
-  <transition name="modal-fade">
+<transition name="modal-fade">
     <div class="modal-backdrop">
-      <div class="modal"
+      <div class="Lmodal"
         role="dialog"
         aria-labelledby="modalTitle"
         aria-describedby="modalDescription"
@@ -28,12 +12,13 @@
         >
           <button
             type="button"
-            class="btn-close"
+            class="Lbtn-close"
             @click="close"
             aria-label="Close modal"
-          >
-            x
-          </button>
+            >
+                x
+            </button>
+          <h2 >{{name }} - {{title}}</h2>          
         </header>
 
         <section
@@ -41,14 +26,58 @@
           id="modalDescription"
         >
           <slot name="body">            
-            <img :src="url"/>
+            <p class="text-center" v-text="letra"></p>
           </slot>
         </section>        
       </div>
     </div>
   </transition>
+    
 </template>
 
+<script>
+export default {
+    name:'Lyrics',
+    data(){
+        return {
+            letra: 'Buscando letra',
+            title: 'Buscando titulo'
+        }
+    },
+    props:{
+        name:{
+            type:String
+        },
+        songs:{
+            type: Array
+        }
+    },
+    methods:{
+        BuscarLetra(){
+            //            
+            const url='https://api.lyrics.ovh/v1/'+this.name+'/'+this.songs[0].strTrack
+            this.title=this.songs[0].strTrack
+            console.log(url)
+            fetch(url)
+            .then(response=> response.json())
+            .then(({lyrics}) => {
+                if(lyrics){
+                    this.letra= lyrics                                    
+                }else{
+                    this.letra= 'Letra no encontrada'                                  
+                }
+                //console.log(lyrics)
+                })
+            .catch(function(error) {
+                console.log('Hubo un problema con la petición Fetch:' + error.message);        
+            });
+        },
+        close() {
+        this.$emit('close');
+        },
+    },
+}
+</script>
 <style>
   .modal-backdrop {
     position: fixed;
@@ -62,12 +91,13 @@
     align-items: center;
   }
 
-  .modal {
+  .Lmodal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  
+    width: 60%;  
   }
 
   .modal-header,
@@ -91,12 +121,13 @@
   .modal-body {
     position: relative;
     padding: 20px 10px;
+    overflow: scroll;    
   }
 
-  .btn-close {
+  .Lbtn-close {
     position: absolute;
     top: 25px;
-    right: 5%;
+    right: 1%;
     border: none;
     font-size: 40px;
     padding: 10px;

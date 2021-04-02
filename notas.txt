@@ -1,3 +1,6 @@
 se requiere tailwindcss postcss@latest y autoprefixer 
 
 npx tailwindcss init-> dentro de la raiz
+
+
+https://www.digitalocean.com/community/tutorials/vuejs-vue-modal-component
