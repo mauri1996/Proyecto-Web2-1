@@ -4,3 +4,6 @@ npx tailwindcss init-> dentro de la raiz
 
 
 https://www.digitalocean.com/community/tutorials/vuejs-vue-modal-component
+
+
+https://web2-proyecto1.surge.sh/
